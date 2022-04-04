@@ -1,6 +1,7 @@
 import os
 
-input_path = '../Test'
+# rename all the images in the data folder from 1.jpg to total_amount_of_images.jpg
+input_path = '../Data'
 
 index = 1
 for f in os.listdir('{}'.format(input_path)):
