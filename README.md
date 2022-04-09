@@ -1,2 +1,5 @@
-# Clothing-Detection-Final_Project
-# Final_Project_Clothes
+Clothing-Detection-Final_Project
+
+This is our final project for BS.c in Computer Science.
+
+Enjoy :)
