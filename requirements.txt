@@ -1,0 +1,11 @@
+joblib==1.1.0
+numpy==1.22.3
+opencv-python==4.5.5.64
+pandas==1.4.1
+Pillow==9.0.1
+pretrainedmodels==0.7.4
+toml==0.10.2
+torch==1.11.0
+torchvision==0.12.0
+tqdm==4.63.1
+wheel==0.37.1

@@ -29,7 +29,7 @@ detectron = YOLOv3Predictor(params=yolo_params)
 
 # Path to similar recommender file and path to complete the look recommender file
 from_path = '../Output/Cropped'
-input_path = '../recommnder_input'
+input_path = '../recommender_input'
 output_path = '../Output-recommend'
 output_path_similar = '{}/similar'.format(output_path)
 output_path_complete = '{}/complete'.format(output_path)
