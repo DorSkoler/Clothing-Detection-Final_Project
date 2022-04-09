@@ -1,6 +1,6 @@
 import os
 
-# rename all the images in the data folder from 1.jpg to total_amount_of_images.jpg
+# Rename all the images in the data folder from 1.jpg to total_amount_of_images.jpg
 input_path = '../Data'
 
 index = 1
