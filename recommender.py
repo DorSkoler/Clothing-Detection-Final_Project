@@ -28,8 +28,8 @@ classes = load_classes(yolo_params["class_path"])
 detectron = YOLOv3Predictor(params=yolo_params)
 
 # Path to similar recommender file and path to complete the look recommender file
-from_path = '../Output/Cropped'
-input_path = '../recommender_input'
+data_path = '../Output/Cropped'
+input_path = '../New folder'
 output_path = '../Output-recommend'
 output_path_similar = '{}/similar'.format(output_path)
 output_path_complete = '{}/complete'.format(output_path)
@@ -57,8 +57,6 @@ def predict_single_image(image_name, path):
         detections.sort(reverse=False ,key = lambda x:x[4])
         # Loop for each class detected in the image
         for x1, y1, x2, y2, cls_conf, cls_pred in detections:
-            if classes[int(cls_pred)] in ["scarf", "belt"]:
-                continue
             class_predict.append(classes[int(cls_pred)])        
             color = colors[int(cls_pred)]
             
@@ -92,10 +90,12 @@ for f in os.listdir('{}'.format(input_path)):
     path = f.removesuffix('.jpg')
     if not os.path.isdir("{}/{}".format(output_path_similar, path)):
         os.mkdir("{}/{}".format(output_path_similar, path))
-    for item_class in predict_single_image('{}/{}'.format(input_path, f), output_path_similar):
-        items = os.listdir('{}/{}'.format(from_path, item_class))
+    predictions = predict_single_image('{}/{}'.format(input_path, f), output_path_similar)
+    for item_class in predictions:
+        items = os.listdir('{}/{}'.format(data_path, item_class))
         rand = random.randint(1, len(items) - 1)
-        shutil.copyfile('{}/{}/{}'.format(from_path, item_class, items[rand]), '{}/{}/similar_{}.jpg'.format(output_path_similar, path, item_class))
+        shutil.copyfile('{}/{}/{}'.format(data_path, item_class, items[rand]), 
+                        '{}/{}/similar_{}.jpg'.format(output_path_similar, path, item_class))
 
 
 # Complete the look        
@@ -103,7 +103,8 @@ for f in os.listdir('{}'.format(input_path)):
     path = f.removesuffix('.jpg')
     if not os.path.isdir("{}/{}".format(output_path_complete, path)):
         os.mkdir("{}/{}".format(output_path_complete, path))
-    for item_class in predict_single_image('{}/{}'.format(input_path, f), output_path_complete):
+    predictions = predict_single_image('{}/{}'.format(input_path, f), output_path_complete)
+    for item_class in predictions:
         flag = True
         checker = { 1: ['footwear', 'boots'], 2: ['pants', 'shorts', 'dress', 'skirt'], 3: ['top' , 'dress', 'outer'] }
         rand_class = ""
@@ -116,6 +117,7 @@ for f in os.listdir('{}'.format(input_path)):
                flag = True
             elif rand_class in checker[3] and item_class in checker[3]:
                flag = True
-        items = os.listdir('{}/{}'.format(from_path, rand_class))
+        items = os.listdir('{}/{}'.format(data_path, rand_class))
         rand = random.randint(1, len(items) - 1)
-        shutil.copyfile('{}/{}/{}'.format(from_path, rand_class, items[rand]), "{}/{}/complete_{}_for_{}.jpg".format(output_path_complete, path, rand_class, item_class))
+        shutil.copyfile('{}/{}/{}'.format(data_path, rand_class, items[rand]), 
+                        "{}/{}/complete_{}_for_{}.jpg".format(output_path_complete, path, rand_class, item_class))

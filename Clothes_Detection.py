@@ -84,6 +84,9 @@ for img_path in os.listdir(input_path):
         f.write(new_path + "\n")
         index = 1
         # Loop for each class detected in the image
+        # x1, y1, x2, y2 - for the pixels of the polygon
+        # cls_conf - the confidence of the model in the class detection
+        # cls_pred - class number
         for x1, y1, x2, y2, cls_conf, cls_pred in detections:
             # Writing to log file the accuracy of current class detected
             f.write("\t+ Label: %s, Conf: %.5f\n" % (classes[int(cls_pred)], cls_conf))        
